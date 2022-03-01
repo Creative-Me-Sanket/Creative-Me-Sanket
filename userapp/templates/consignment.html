@@ -1,0 +1,116 @@
+<div id="divconsign" style="display: none">
+
+    <h3>Your Consignments</h3>
+
+  {% for cs in consign %}
+
+  <div class="main-card mb-3 card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4">{{ cs.type }}</div>
+        <div class="col-md-4">{{ cs.date }}</div>
+        <div class="col-md-4">{{ cs.tvehicle.company.company }}</div>
+      </div>
+      <div class="row mt-3">
+          <div class="col-md-4">
+              {{cs.tvehicle.spoint.name}} -> {{cs.tvehicle.epoint.name}}
+
+          </div>
+
+         
+
+          <div class="col-md-4">
+                {% if cs.status == 1 %}
+                
+                
+                <div class="mb-2 mr-2 badge badge-info">Pending from Packers</div>
+
+
+
+                {% elif cs.status == 2 %}
+
+                <div class="mb-2 mr-2 badge badge-info">Confirmed from Packers, Make Payment</div>
+
+            
+                {% elif cs.status == 3 %}
+
+          <div class="mb-2 mr-2 badge badge-success"> Paid & Successful delivery</div>
+
+
+               
+
+                {% elif cs.status == 4 %}
+
+          <div class="mb-2 mr-2 badge badge-danger">Cancelled</div>
+
+                
+
+
+                {% endif %}
+          </div>
+          <div class="col-md-4">
+            {% if cs.status == 2 %}
+              <button class="btn btn-success" onclick="paynow('{{cs.id}}')" > Pay Now </button>
+            {% endif %}
+            </div>
+      </div>
+    </div>
+  </div>
+      {% endfor %}
+</div>
+</div>
+</div>
+
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+
+      function paynow(id){
+
+      var pid = id;
+
+      alert(pid);
+
+      var options = {
+        key: "rzp_test_b43Jzo0lFDfP2b",
+        amount: "50000",
+        currency: "INR",
+        name: "Municipal Corporation",
+        description: "Test Transaction",
+        callback_url:"http://127.0.0.1:8000/payment-success/" + pid+'/' ,
+        redirect: true,
+        image: "http://bsmedia.business-standard.com/_media/bs/img/article/2016-04/27/full/1461770341-3782.jpg",
+        handler: function (response) {
+          alert(response.razorpay_payment_id);
+          alert(response.razorpay_order_id);
+          alert(response.razorpay_signature);
+        },
+        prefill: {
+          name: "Demo name",
+          email: "demomail@example.com",
+          contact: "9999999999",
+        },
+        notes: {
+          address: "Sinhgad College, Pune",
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+      var rzp1 = new Razorpay(options);
+      rzp1.on("payment.failed", function (response) {
+        alert(response.error.code);
+        alert(response.error.description);
+        alert(response.error.source);
+        alert(response.error.step);
+        alert(response.error.reason);
+        alert(response.error.metadata.order_id);
+        alert(response.error.metadata.payment_id);
+      });
+
+
+      rzp1.open();
+
+   
+    }
+    </script>

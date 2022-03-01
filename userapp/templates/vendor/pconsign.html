@@ -1,0 +1,175 @@
+<div id="divconsign" style="display: none">
+    <div class="row mb-2">
+      <div class="col-md-8">
+        <h3>Your All Consignments</h3>
+      </div>
+  
+      <div class="col-md-4 justify-content-end m-auto align-content-end">
+        
+      </div>
+    </div>
+  
+    <div class="main-card mb-2 card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col">Type of Consignment</div>
+          <div class="col">Weight</div>
+          <div class="col">User</div>
+          <div class="col">Transporting vehicle</div>
+          <div class="col">Action</div>
+        </div>
+      </div>
+    </div>
+  
+    {% if tvs.exists %} {% for tv in tvs %}
+  
+    <div class="main-card mb-3 card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col">{{ tv.type }} </div>
+          <div class="col">{{ tv.wt }}</div>
+          <div class="col">{{ tv.user.username }}</div>
+          <div class="col">{{ tv.tvehicle.spoint }} -> {{tv.tvehicle.epoint}} ,<br> {{tv.vehicle.vmodel}} </div>
+          <div class="col">
+            
+            {% if tv.status == 1 %}
+
+            <a href="{% url 'update-status' tv.id %}"> <button class="btn btn-primary">Confirm & Allow for Payment</button> </a>
+            
+            {% elif tv.status == 2 %}
+            
+            <a href="#"> <button class="btn btn-info">Pending for Payment</button> </a>
+
+            {% elif tv.status == 3 %}
+
+            <a href="#"> <button class="btn btn-subccess">Done(Payment Confirmed)</button> </a>
+
+            {% elif tv.status == 4 %}
+
+            <a href="#"> <button class="btn btn-danger">Cancelled</button> </a>
+
+
+            
+            {% endif %}
+            
+            </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %} {% else %}
+  
+    <h5>No driver added yet</h5>
+  
+    {% endif %}
+  </div>
+  </div>
+  
+  
+  <div
+    class="modal fade"
+    id="addDriver"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Driver</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form action="{% url 'add-driver' %}" method="POST">
+              {% csrf_token %}
+  
+              <div class="row">
+  
+              
+  
+            <div class="mb-3 col-md-6">
+              <label for="exampleInputEmail1" class="form-label"
+                > First Name</label
+              >
+              <input
+                type="text"
+                name = "dfname"
+                class="form-control"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+              />
+            </div>
+  
+            <div class="mb-3 col-md-6">
+              <label for="exampleInputEmail1" class="form-label"
+                >Last Name</label
+              >
+              <input
+                type="text"
+                name = "dlname"
+                class="form-control"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+              />
+            </div>
+  
+          </div>
+  
+  
+          <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label"
+                >City</label
+              >
+              <input
+                type="text"
+                name="dcity"
+                class="form-control"
+                id="exampleInputPassword1"
+              />
+            </div>
+  
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label"
+                >Email</label
+              >
+              <input
+                type="email"
+                name="demail"
+                class="form-control"
+                id="exampleInputPassword1"
+              />
+            </div>
+  
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label"
+                >Contact No</label
+              >
+              <input
+                type="number"
+                name="dcno"
+                class="form-control"
+                id="exampleInputPassword1"
+              />
+            </div>
+  
+            
+  
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Close
+          </button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+  
+      </form>
+  
+      </div>
+    </div>
+  </div>
+  
+  

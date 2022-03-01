@@ -1,0 +1,61 @@
+<div id="divinvoice" style="display: none">
+  <h3>Your Invoices</h3>
+
+    {% for cs in consign %}
+
+    {% if cs.status == 3 : %}
+
+    <div class="main-card mb-3 card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4">{{ cs.type }}</div>
+          <div class="col-md-4">{{ cs.date }}</div>
+          <div class="col-md-4">{{ cs.tvehicle.company.company }}</div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-md-4">
+            {{cs.tvehicle.spoint.name}} -> {{cs.tvehicle.epoint.name}}
+          </div>
+
+          <div class="col-md-4">
+            {% if cs.status == 1 %}
+
+            <div class="mb-2 mr-2 badge badge-info">Pending from Packers</div>
+
+            {% elif cs.status == 2 %}
+
+            <div class="mb-2 mr-2 badge badge-info">
+              Confirmed from Packers, Make Payment
+            </div>
+
+            {% elif cs.status == 3 %}
+
+            <div class="mb-2 mr-2 badge badge-success">
+              Paid & Successful delivery
+            </div>
+
+            {% elif cs.status == 4 %}
+
+            <div class="mb-2 mr-2 badge badge-danger">Cancelled</div>
+
+            {% endif %}
+          </div>
+          <div class="col-md-4">
+            {% if cs.status == 2 %}
+            <button class="btn btn-success" onclick="paynow('{{cs.id}}')">
+              Pay Now
+            </button>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% endif %}
+
+    {% endfor %}
+  </div>
+</div>
+
+</div>
+</div>
