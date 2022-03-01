@@ -12,5 +12,6 @@ There is lack of security and authenticity of the vehicles and drivers in the ex
 So, Smart Transport Management System provides an integrated platform for the vendors where all the vendors are attached to one system where user gets a wide range of choices to choose any vendor at different location. This creates users to have multiple options for selecting their vendors with whom the can work efficiently.
 
 This mini project has been implemented using Django Framework, Python and SQLite for making it very convenient for people to know the exact status location wise and they can book the vehicles without wasting much time in finding the vendor  with all the facilities.
+![Homepage](https://user-images.githubusercontent.com/86483357/156194582-46b56e48-da37-4d63-b00b-aea828d50add.png)
 
 
