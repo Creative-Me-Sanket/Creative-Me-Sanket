@@ -13,6 +13,8 @@ So, Smart Transport Management System provides an integrated platform for the ve
 
 This mini project has been implemented using Django Framework, Python and SQLite for making it very convenient for people to know the exact status location wise and they can book the vehicles without wasting much time in finding the vendor  with all the facilities.
 # User Interface Screens
+
+# Homepage
 ![Homepage](https://user-images.githubusercontent.com/86483357/156194582-46b56e48-da37-4d63-b00b-aea828d50add.png)
 
 
